@@ -1,13 +1,9 @@
- 
 #include <stdio.h>
- 
-#include <stdlib.h> 
-
- 
+#include <stdlib.h>  
 typedef struct 
 {
 	 
-int x;
+	int x;
 	int y; 
 
 }Step;
@@ -165,7 +161,7 @@ void Traver(int M,int N,int x,int y)
  if (chess == NULL) 
  {
  
-  printf("ÄÚ´æ·ÖÅäÊ§°Üª£ª£\n"); 
+  printf("å†…å­˜åˆ†é…å¤±è´¥î€‚î€‚\n"); 
   exit(-1); 
  } 
  for (i = 0; i < M; i++) 
@@ -173,7 +169,7 @@ void Traver(int M,int N,int x,int y)
   *(chess + i) = (int *) malloc (N * sizeof(int)); 
   if (*(chess + i) == NULL) 
   { 
-   printf("ÄÚ´æ·ÖÅäÊ§°Üª£ª£\n"); 
+   printf("å†…å­˜åˆ†é…å¤±è´¥î€‚î€‚\n"); 
    exit(-1); 
   } 
  } 
@@ -197,9 +193,9 @@ int main(void)
  int m, n; 
  int x, y; 
  
- printf("ÇëÊäÈëÆåÅÌ´óĞ¡m*nª¤|m-n|<=2ÇÒmºÍn¶¼ÎªÅ¼Êıª¥ª§\n"); 
+ printf("è¯·è¾“å…¥æ£‹ç›˜å¤§å°m*nî€ƒ|m-n|<=2ä¸”må’Œnéƒ½ä¸ºå¶æ•°î€„î€†\n"); 
  scanf("%d %d",&m,&n); 
- printf("ÇëÊäÈëÂíÌøÇ°ËùÔÚµÄÎ»ÖÃ	ºá×İ×ø±ê0 <= x < %dºÍ0 <= y < %d ª¥ª§\n",m,n); 
+ printf("è¯·è¾“å…¥èµ·å§‹ä½ç½®ï¼ˆx,yï¼‰",m,n); 
  scanf("%d %d",&x,&y); 
  
  Traver(m,n,x,y); 

@@ -5,16 +5,17 @@
 int m,n; //棋盘的大小
 int L,C;//起始的位置
 FILE *fin; //读入最初的分块
+int count=1;
 typedef struct 
 { 
  int x,y; 
 }chese; //给出小棋盘的路径
-int count = 1;
+
 chese b66[36],b68[48],b86[48],b88[64],b810[80],b108[80],b1010[100],b1012[120],b1210[120]; //6*6 6*8 8*6 …12*10
 
 chese link[500][500]; 
 int a[10][12]; //用来读入小棋盘路径的数组
-void step(int m,int n,chese b[]) //将a[][]的内容输入到
+void step(int m,int n,chese b[]) //将a[][]的内容输入到分块中。
 { 
  int i,j,k=m*n,p; 
  if(m<n) 
@@ -46,8 +47,11 @@ void input() //输入函数
 {		
 	 int i;
 	 int j; 
-	 printf("请输入棋盘规格 (格式为m,n,例如6 6)"); 
-	 scanf("%d%d",&m,&n);  
+	 printf("请输入棋盘规格 (格式为n,例如6)"); 
+	 scanf("%d",&n);
+	 printf("请输入马的初始位置，L和C");
+	 scanf("%d%d",&L,&C);
+	 m = n;
 	 fin=fopen("12.txt","r"); //打开小棋盘路径的文件 
 	 
 	 
@@ -93,8 +97,7 @@ void input() //输入函数
 	 step(12,10,b1210); 
 	 
 	 //读入起始位置 
-	 printf("请输入起始位置(x,y)：");
-	 scanf("%d%d",&L,&C);
+	 scanf("请输入起始位置：%d%d",&L,&C);
 } 	
 int pos(int x,int y,int col) 
 { 
@@ -104,9 +107,8 @@ void build(int m,int n,int offx,int offy,int col,chese b[])
 { 
  	int i,p,q,k=m*n,x1,x2,y1,y2; 
  	for(i=0;i<k;i++) 
- 	{
-		
-		count ++;
+ 	{	
+		count++;
 		x1=offx+b[i].x; 
 		y1=offy+b[i].y; 
 		x2=offx+b[(i+1)%k].x; 
@@ -118,7 +120,7 @@ void build(int m,int n,int offx,int offy,int col,chese b[])
  	} 
 } 
 void Base(int mm,int nn,int offx,int offy) 
-{ 
+{	
  	if(mm==6&&nn==6)
 	 	build(mm,nn,offx,offy,n,b66); 
  	else if(mm==6&&nn==8)
@@ -142,9 +144,9 @@ bool comp(int mm,int nn,int offx,int offy)
 { 
  	int mm1,mm2,nn1,nn2,i,j1,j2; 
  	int x[8],y[8],p[8]; 
- 	if(mm%2||nn%2||mm-nn>2||nn-mm>2||mm<6||nn<6) //不满足条件，自动结束
+ 	/*if(mm%2||nn%2||mm-nn>2||nn-mm>2||mm<6||nn<6) //不满足条件，自动结束
 	 	return true;
-	//调用基本的棋盘 
+	*///调用基本的棋盘 
  	if(mm<12||nn<12)
  	{
   		Base(mm,nn,offx,offy); 
@@ -166,13 +168,9 @@ bool comp(int mm,int nn,int offx,int offy)
 	  
 	//递归调用，开始分治 
   	comp(mm1,nn1,offx,offy); 
-
   	comp(mm1,nn2,offx,offy+nn1); 
-
   	comp(mm2,nn1,offx+mm1,offy); 
-
   	comp(mm2,nn2,offx+mm1,offy+nn1); 
-
   	x[0]=offx+mm1-1;y[0]=offy+nn1-3; 
   	x[1]=x[0]-1;y[1]=y[0]+2; 
   	x[2]=x[1]-1;y[2]=y[1]+2; 
@@ -237,6 +235,6 @@ int main()
  
 	 input(); 
 	 output(); 
-	 printf("时间复杂度度：%d",count);
+	 printf("时间复杂%d\n",count);
 	 return 0;
 }
